@@ -1,0 +1,135 @@
+console.log("client.js works");
+// var canvas = document.getElementsByTagName('canvas')[0];
+// canvas.width = 400;
+// canvas.height = 400;
+// var ctx = canvas.getContext('2d');
+// var HOST = location.origin.replace(/^http/, 'ws')
+// var socket = new WebSocket(HOST);
+// // var socket = new WebSocket('ws://localhost:1337');
+// var id;
+// var players = [];
+// var keyStates = [];
+
+
+// socket.onopen = function() {
+// 	console.log("Socket Open");
+// }
+
+// // window.onbeforeunload = function () {
+// // 	socket.send(JSON.stringify({
+// //     	type: 'close'
+// //     }));
+// // };
+
+// socket.onmessage = function(e) {
+// 	var message = JSON.parse(e.data);
+
+// 	if (message.type == 'playersUpdate') {
+
+// 		updatePlayers();
+// 		if (players[id].updated==true) {
+// 			players[id].updated=false;
+// 			socket.send(JSON.stringify({
+// 				type: 'playerUpdate',
+// 				info: players[id]
+// 			}));
+// 		}
+
+// 		for (var i=0; i<message.players.length; i++) {
+// 			players[i].x = message.players[i].x;
+// 			players[i].velX = message.players[i].velX;
+// 			players[i].y = message.players[i].y;
+// 			players[i].velY = message.players[i].velY;
+// 		}
+// 	}
+// 	else if (message.type == 'newPlayer') {
+// 		players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
+// 		console.log(message);
+// 	}
+// 	else if (message.type == 'initPlayers') {
+// 		players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
+// 	}
+// 	else if (message.type == 'receiveId') {
+// 		id = message.id;
+// 		console.log("id: " + id);
+// 	}
+// } 
+
+
+// function updatePlayers() {
+// 	for (var i=0; i<players.length; i++) {
+// 		players[i].control();
+// 	}
+// }
+
+
+// function Player(x, velX, y, velY, id, moves) {
+// 	this.x = x;
+// 	this.velX = velX;
+// 	this.y = y;
+// 	this.velY = velY;
+// 	this.id = id;
+// 	this.moves = moves;
+// 	this.updated = false;
+
+// 	this.control = function() {
+// 		if (keyStates[38] || keyStates[87]) {
+// 			this.moves[0] = true;
+// 		}
+// 		else {
+// 			this.moves[0] = false;
+// 		}
+// 		if (keyStates[39] || keyStates[68]) {
+// 			this.moves[1] = true;
+// 		}
+// 		else {
+// 			this.moves[1] = false;
+// 		}
+// 		if (keyStates[40] || keyStates[83]) {
+// 			this.moves[2] = true;
+// 		}
+// 		else {
+// 			this.moves[2] = false;
+// 		}
+// 		if (keyStates[37] || keyStates[65]) {
+// 			this.moves[3] = true;
+// 		}
+// 		else {
+// 			this.moves[3] = false;
+// 		}
+// 	};
+// };
+
+
+// function draw() {
+// 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+// 	for (var i=0; i<players.length; i++) {
+// 		ctx.beginPath();
+// 		if (players[i].id == id) {
+// 			ctx.fillStyle = 'red';
+// 		}
+// 		ctx.arc(players[i].x, players[i].y, 20, 0, Math.PI*2);
+// 		if (players[i].id == id) {
+// 			ctx.fill();
+// 		}
+// 		ctx.stroke();
+// 	}
+// 	requestAnimationFrame(draw);
+// }
+// requestAnimationFrame(draw);
+
+
+// window.addEventListener('keydown', function(e) {
+// 	keyStates[e.keyCode] = true;
+// 	players[id].updated = true;
+// 	console.log(e.keyCode);
+// });
+// window.addEventListener('keyup', function(e) {
+// 	keyStates[e.keyCode] = false;
+// 	players[id].updated = true;
+// });
+
+
+
+
+
