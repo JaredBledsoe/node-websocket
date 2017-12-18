@@ -57,7 +57,7 @@ wss.on('connection', function(ws) {
 			for (var i=0; i<clients.length-1; i++) {
 				clients[i].send(JSON.stringify({
 					type: 'delPlayer',
-					id: message[id]
+					id: message.id
 				}));
 			}
 		}
