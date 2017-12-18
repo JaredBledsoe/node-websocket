@@ -36,18 +36,18 @@ wss.on('connection', function(ws) {
 			players[message.info.id].moves = message.info.moves;
 			players[message.info.id].updated = true;
 		}
-		else if (message.type == 'pong') {
-			players[message.info.id].alive = true;
-			if (message.info.id >= players.length-1) {
-				console.log("Reached end of players")''
-				for (var i=0; i<players.length; i++) {
-					if (players[i].pong = false) {
-						clients[i].close();
-						console.log("Player left");
-					}
-				}
-			}
-		}
+// 		else if (message.type == 'pong') {
+// 			players[message.info.id].alive = true;
+// 			if (message.info.id >= players.length-1) {
+// 				console.log("Reached end of players")''
+// 				for (var i=0; i<players.length; i++) {
+// 					if (players[i].pong = false) {
+// 						clients[i].close();
+// 						console.log("Player left");
+// 					}
+// 				}
+// 			}
+// 		}
 
 	});
 
