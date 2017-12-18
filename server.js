@@ -14,7 +14,7 @@ const wss = new SocketServer({ server });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  ws.on('close', () => ws.close());
+  ws.on('close', () => console.log('Client disconnected'));
 });
 
 var clients = [];
@@ -35,6 +35,18 @@ wss.on('connection', function(ws) {
 		if (message.type == 'playerUpdate') {
 			players[message.info.id].moves = message.info.moves;
 			players[message.info.id].updated = true;
+		}
+		else if (message.type == 'pong') {
+			players[message.info.id].alive = true;
+			if (message.info.id >= players.length-1) {
+				console.log("Reached end of players")''
+				for (var i=0; i<players.length; i++) {
+					if (players[i].pong = false) {
+						clients[i].close();
+						console.log("Player left");
+					}
+				}
+			}
 		}
 
 	});
@@ -75,6 +87,16 @@ setInterval(function() {
 },30);
 
 
+//Check if clients are still there
+setInterval(function() {
+	for (var i=0; i<players.length; i++) {
+		players[i].pong = false;
+		clients[i].send(JSON.stringify({
+			type: 'ping'
+		}));
+	}
+},1000);
+
 function Player() {
 	this.x = 200;
 	this.velX = Math.random()*2;
@@ -83,6 +105,7 @@ function Player() {
 	this.id = clients.length-1;
 	this.moves = [false, false, false, false];
 	this.updated = false;
+	this.pong = true;
 };
 
 Player.prototype.update = function() {
