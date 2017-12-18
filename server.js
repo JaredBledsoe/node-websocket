@@ -33,8 +33,10 @@ wss.on('connection', function(ws) {
 		// 	updatedPlayers.push(message.info.id);
 		// }
 		if (message.type == 'playerUpdate') {
-			players[message.info.id].moves = message.info.moves;
-			players[message.info.id].updated = true;
+			if (players[message.info.id]) {
+				players[message.info.id].moves = message.info.moves;
+				players[message.info.id].updated = true;
+			}
 		}
 // 		if (message.type == 'pong') {
 // 			players[message.id].pong = true;
