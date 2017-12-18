@@ -59,6 +59,10 @@ wss.on('connection', function(ws) {
 					type: 'delPlayer',
 					id: message.id
 				}));
+				clients[i].send(JSON.stringify({
+					type: 'receiveId',
+					id: i
+				}));
 			}
 		}
 	});
