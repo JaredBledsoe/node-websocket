@@ -26,6 +26,8 @@ wss.on('connection', function(ws) {
 
 	players.push(new Player());
 
+	ws.on('close', () => ws.close());
+	
 	ws.on('message', function(e) {
 		var message = JSON.parse(e);
 		// if (message.type == 'move') {
