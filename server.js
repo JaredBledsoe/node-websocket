@@ -40,7 +40,7 @@ wss.on('connection', function(ws) {
 			players[message.info.id].moves = message.info.moves;
 			players[message.info.id].updated = true;
 		}
-		else if (message.type == 'pong') {
+		if (message.type == 'pong') {
 			players[message.id].pong = true;
 			if (message.id == players.length-1) {
 				console.log("Reached end of players " + message.id);
