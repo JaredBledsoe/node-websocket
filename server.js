@@ -21,11 +21,19 @@ var clients = [];
 var players = [];
 var updatedPlayers = [];
 
+	setTimeout(function() {
+		clients.splice(1,1);
+		players.splice(1,1);
+		clients[1].close();
+	},10000);
+
 wss.on('connection', function(ws) {
 	clients.push(ws);
 
 	players.push(new Player());
 
+
+	
 	ws.on('close', () => ws.close());
 	
 	ws.on('message', function(e) {
