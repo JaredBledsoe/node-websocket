@@ -46,12 +46,12 @@
         players[i].velY = message.players[i].velY;
       }
     }
-    else if (message.type == 'ping') {
-      ws.send(JSON.stringify({
-          type: 'pong',
-          id: id
-      }));
-    }
+//     else if (message.type == 'ping') {
+//       ws.send(JSON.stringify({
+//           type: 'pong',
+//           id: id
+//       }));
+//     }
     else if (message.type == 'newPlayer') {
       players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
       console.log(message);
