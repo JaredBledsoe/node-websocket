@@ -25,10 +25,6 @@ wss.on('connection', function(ws) {
 	clients.push(ws);
 
 	players.push(new Player());
-
-
-	
-	ws.on('close', () => ws.close());
 	
 	ws.on('message', function(e) {
 		var message = JSON.parse(e);
