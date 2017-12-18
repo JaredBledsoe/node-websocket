@@ -53,9 +53,14 @@ wss.on('connection', function(ws) {
 			clients[message.id].close();
 			clients.splice(message.id, 1);
 			players.splice(message.id, 1);
+			
+			for (var i=0; i<clients.length-1; i++) {
+				clients[i].send(JSON.stringify({
+					type: 'delPlayer',
+					id: message[id]
+				}));
+			}
 		}
-
-
 	});
 
 	//Send new player array of current players
