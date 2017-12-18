@@ -42,8 +42,10 @@ wss.on('connection', function(ws) {
 				console.log("Reached end of players " + message.id);
 				for (var i=0; i<players.length; i++) {
 					if (players[i].pong = false) {
+						console.log("Player " + i + " Left");
+						clients.splice(i, 1);
+						players.splice(i, 1);
 						clients[i].close();
-						console.log("Player left");
 					}
 				}
 			}
