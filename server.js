@@ -45,7 +45,7 @@ wss.on('connection', function(ws) {
 						console.log("Player " + i + " Left");
 						clients.splice(i, 1);
 						players.splice(i, 1);
-						clients[i].terminate();
+						//clients[i].terminate();
 					}
 				}
 			}
