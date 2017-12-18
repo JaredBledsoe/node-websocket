@@ -77,7 +77,7 @@ wss.on('connection', function(ws) {
 	}
 
 	//Send other players new player data
-	for (var i=0; i<clients.length-1; i++) {
+	for (var i=0; i<clients.length; i++) {
 		clients[i].send(JSON.stringify({
 			type: 'newPlayer',
 			info: players[players.length-1],
