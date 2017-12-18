@@ -61,14 +61,11 @@ wss.on('connection', function(ws) {
 					type: 'delPlayer',
 					id: message.id
 				}));
-			}
-			for (var i=message.id+1; i<clients.length; i++) {
 				clients[i].send(JSON.stringify({
 					type: 'receiveId',
-					id: i-1
+					id: i
 				}));
 			}
-			
 		}
 	});
 
