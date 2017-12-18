@@ -38,8 +38,8 @@ wss.on('connection', function(ws) {
 		}
 		else if (message.type == 'pong') {
 			//players[message.info.id].pong = true;
-			if (message.info.id == players.length-1) {
-				console.log("Reached end of players" + message.info.id);
+			if (message.id == players.length-1) {
+				console.log("Reached end of players " + message.id);
 				for (var i=0; i<players.length; i++) {
 					if (players[i].pong = false) {
 						//clients[i].close();
