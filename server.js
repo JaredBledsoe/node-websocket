@@ -37,9 +37,9 @@ wss.on('connection', function(ws) {
 			players[message.info.id].updated = true;
 		}
 		else if (message.type == 'pong') {
-			players[message.info.id].pong = true;
+			//players[message.info.id].pong = true;
 			if (message.info.id == players.length-1) {
-				console.log("Reached end of players");
+				console.log("Reached end of players" + message.info.id);
 				for (var i=0; i<players.length; i++) {
 					if (players[i].pong = false) {
 						//clients[i].close();
