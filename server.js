@@ -36,19 +36,19 @@ wss.on('connection', function(ws) {
 			players[message.info.id].moves = message.info.moves;
 			players[message.info.id].updated = true;
 		}
-		if (message.type == 'pong') {
-			players[message.id].pong = true;
-			if (message.id == players.length-1) {
-				console.log("Reached end of players " + message.id);
-				for (var i=0; i<players.length; i++) {
-					if (players[i].pong = false) {
-						clients[i].close();
-						clients.splice(i, 1);
-						players.splice(i, 1);
-					}
-				}
-			}
-		}
+// 		if (message.type == 'pong') {
+// 			players[message.id].pong = true;
+// 			if (message.id == players.length-1) {
+// 				console.log("Reached end of players " + message.id);
+// 				for (var i=0; i<players.length; i++) {
+// 					if (players[i].pong = false) {
+// 						clients[i].close();
+// 						clients.splice(i, 1);
+// 						players.splice(i, 1);
+// 					}
+// 				}
+// 			}
+// 		}
 		if (message.type == 'close') {
 			clients[message.id].close();
 			clients.splice(message.id, 1);
@@ -95,14 +95,14 @@ setInterval(function() {
 
 
 //Check if clients are still there
-setInterval(function() {
-	for (var i=0; i<players.length; i++) {
-		players[i].pong = false;
-		clients[i].send(JSON.stringify({
-			type: 'ping'
-		}));
-	}
-},1000);
+// setInterval(function() {
+// 	for (var i=0; i<players.length; i++) {
+// 		players[i].pong = false;
+// 		clients[i].send(JSON.stringify({
+// 			type: 'ping'
+// 		}));
+// 	}
+// },1000);
 
 function Player() {
 	this.x = 200;
