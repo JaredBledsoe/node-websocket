@@ -21,12 +21,6 @@ var clients = [];
 var players = [];
 var updatedPlayers = [];
 
-	setTimeout(function() {
-				clients[1].close();
-		clients.splice(1,1);
-		players.splice(1,1);
-	},10000);
-
 wss.on('connection', function(ws) {
 	clients.push(ws);
 
@@ -52,10 +46,9 @@ wss.on('connection', function(ws) {
 				console.log("Reached end of players " + message.id);
 				for (var i=0; i<players.length; i++) {
 					if (players[i].pong = false) {
-						console.log("Player " + i + " Left");
+						clients[i].close();
 						clients.splice(i, 1);
 						players.splice(i, 1);
-						//clients[i].terminate();
 					}
 				}
 			}
