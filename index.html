@@ -18,12 +18,13 @@
   ws.onopen = function() {
     console.log("ws Open");
   }
-
-  // window.onbeforeunload = function () {
-  //  ws.send(JSON.stringify({
-  //      type: 'close'
-  //     }));
-  // };
+  
+  window.onunload = function () {
+   ws.send(JSON.stringify({
+       type: 'close',
+       id: id
+      }));
+  };
 
   ws.onmessage = function(e) {
     var message = JSON.parse(e.data);
