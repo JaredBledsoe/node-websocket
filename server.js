@@ -49,6 +49,12 @@ wss.on('connection', function(ws) {
 				}
 			}
 		}
+		if (message.type == 'close') {
+			clients[message.id].close();
+			clients.splice(message.id, 1);
+			players.splice(message.id, 1);
+		}
+
 
 	});
 
