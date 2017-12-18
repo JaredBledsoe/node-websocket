@@ -65,6 +65,7 @@
       console.log("id: " + id);
     }
     else if (message.type == 'delPlayer') {
+      console.log("Player " + message.id + " Left");
       players.splice(message.id, 1);
     }
   } 
