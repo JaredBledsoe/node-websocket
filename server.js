@@ -100,7 +100,7 @@ setInterval(function() {
 	for (var i=0; i<players.length-1; i+=2) {
 		var distance = Math.sqrt(((players[i].x - players[i+1].x) * (players[i].x - players[i+1].x))+ ((players[i].y - players[i+1].y) * (players[i].y - players[i+1].y)));
 			if (players.length >= 2 && distance<40) {
-				c2c(players[0], players[1]);
+				c2c(players[i], players[i+1]);
 		}
 	}
 
@@ -151,15 +151,15 @@ Player.prototype.update = function() {
 	//Collisions
 	if (this.x-10>400 || this.x+10<0) {
 		// this.velX = -this.velX*1.1;
-		this.x = 200;
-		this.y = 200;
+		this.x = Math.random()*300+50;
+		this.y = Math.random()*300+50;
 		this.velX = 0;
 		this.velY = 0;
 	}
 	if (this.y-10>400 || this.y+10<0) {
 		// this.velY = -this.velY*1.1;
-		this.x = 200;
-		this.y = 200;
+		this.x = Math.random()*300+50;
+		this.y = Math.random()*300+50;
 		this.velX = 0;
 		this.velY = 0;
 	}
