@@ -131,8 +131,8 @@ function Player() {
 Player.prototype.update = function() {
 	this.x += this.velX;
 	this.y += this.velY;
-	this.velX *= .97;
-	this.velY *= .97;
+	this.velX *= .99;
+	this.velY *= .99;
 
 	//Movement
 	if (this.moves[0]) {
