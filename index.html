@@ -133,14 +133,18 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (var i=0; i<players.length; i++) {
       ctx.beginPath();
-      if (players[i].id == id) {
-        ctx.fillStyle = 'red';
-      }
       ctx.arc(players[i].x, players[i].y, 20, 0, Math.PI*2);
+      ctx.stroke();
       if (players[i].id == id) {
+        ctx.fillStyle = 'rgba(255, 0, 0, .5)';
+        ctx.fill();
+        ctx.strokeText("YOU", players[i].x, players[i].y+4);
+        ctx.textAlign = "center";
+      }
+      else {
+        ctx.fillStyle = 'rgba(51, 153, 255, .5)';
         ctx.fill();
       }
-      ctx.stroke();
     }
     requestAnimationFrame(draw);
   }
