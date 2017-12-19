@@ -13,8 +13,13 @@
   <canvas></canvas>
   
   <script>
-  var HOST = location.origin.replace(/^http/, 'ws')
+  var HOST = location.origin.replace(/^http/, 'ws');
+
+  //Online
   var ws = new WebSocket(HOST);
+
+  //Local
+  //var ws = new WebSocket('ws://localhost:3000');
 
   var canvas = document.getElementsByTagName('canvas')[0];
   canvas.width = 400;
@@ -23,11 +28,6 @@
   var id;
   var players = [];
   var keyStates = [];
-
-
-  ws.onopen = function() {
-    console.log("ws Open");
-  }
   
   window.onunload = function () {
    ws.send(JSON.stringify({
@@ -72,10 +72,13 @@
     }
     else if (message.type == 'receiveId') {
       id = message.id;
-      console.log("id: " + id);
     }
     else if (message.type == 'delPlayer') {
       console.log("Player " + message.id + " Left");
+      for (var i=message.id; i<players.length; i++) {
+        players[i].id = players[i].id-1;
+      }
+      id = message.newId;
       players.splice(message.id, 1);
     }
   } 
