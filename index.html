@@ -7,6 +7,22 @@
     left: 25%;
     top: 25%;
   }
+  .died {
+    animation-name: died;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes died {
+    0% {
+      background-color: white;
+    }
+    50% {
+      background-color: rgba(255, 0, 0, .5);
+    }
+    100% {
+      background-color: white;
+    }
+  }
 </style>
 </head>
 <body>
@@ -16,10 +32,10 @@
   var HOST = location.origin.replace(/^http/, 'ws');
 
   //Online
-  var ws = new WebSocket(HOST);
+  // var ws = new WebSocket(HOST);
 
   //Local
-  //var ws = new WebSocket('ws://localhost:3000');
+  var ws = new WebSocket('ws://localhost:3000');
 
   var canvas = document.getElementsByTagName('canvas')[0];
   canvas.width = 400;
@@ -57,6 +73,12 @@
         players[i].velY = message.players[i].velY;
       }
     }
+    else if (message.type == 'died') {
+      document.getElementsByTagName('body')[0].classList.add('died');
+      setTimeout(function() {
+        document.getElementsByTagName('body')[0].classList.remove('died');
+      },500);
+    }
 //     else if (message.type == 'ping') {
 //       ws.send(JSON.stringify({
 //           type: 'pong',
@@ -67,6 +89,7 @@
       players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
       console.log(message);
     }
+
     else if (message.type == 'initPlayers') {
       players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
     }
