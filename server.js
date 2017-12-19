@@ -134,8 +134,8 @@ function Player() {
 Player.prototype.update = function() {
 	this.x += this.velX;
 	this.y += this.velY;
-	this.velX *= .99;
-	this.velY *= .99;
+	this.velX *= .97;
+	this.velY *= .97;
 
 	//Movement
 	if (this.moves[0]) {
@@ -158,6 +158,10 @@ Player.prototype.update = function() {
 		this.y = Math.random()*300+50;
 		this.velX = 0;
 		this.velY = 0;
+		clients[this.id].send(JSON.stringify({
+			type: 'died',
+			info: this.id
+		}));
 	}
 	if (this.y-10>400 || this.y+10<0) {
 		// this.velY = -this.velY*1.1;
@@ -165,6 +169,11 @@ Player.prototype.update = function() {
 		this.y = Math.random()*300+50;
 		this.velX = 0;
 		this.velY = 0;
+		clients[this.id].send(JSON.stringify({
+			type: 'died',
+			info: this.id
+		}));
+
 	}
 };
 
@@ -186,8 +195,8 @@ function c2c(p1, p2) {
     p1VelY = p1Mag*Math.sin(p1Dir-collisionision_angle);
     p2VelX = p2Mag*Math.cos(p2Dir-collisionision_angle);
     p2VelY = p2Mag*Math.sin(p2Dir-collisionision_angle);
-    final_velX_1 = ((20-20)*p1VelX+(20+20)*p2VelX)/(20+20);
-    final_velX_2 = ((20+20)*p1VelX+(20-20)*p2VelX)/(20+20);
+    final_velX_1 = ((200-200)*p1VelX+(200+200)*p2VelX)/(200+200);
+    final_velX_2 = ((200+200)*p1VelX+(200-200)*p2VelX)/(200+200);
     final_velY_1 = p1VelY;
     final_velY_2 = p2VelY;
     p1.velX = Math.cos(collisionision_angle)*final_velX_1+Math.cos(collisionision_angle+Math.PI/2)*final_velY_1;
