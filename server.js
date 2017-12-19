@@ -97,18 +97,15 @@ setInterval(function() {
 		}));
 	}
 
-	for (var i=0; i<players.length-1; i) {
-				if (i==0) {
-			i+=2;
-    	}
-		else {
-			i++;
-    	}
-		var distance = Math.sqrt(((players[i].x - players[i+1].x) * (players[i].x - players[i+1].x))+ ((players[i].y - players[i+1].y) * (players[i].y - players[i+1].y)));
+	for (var i=0; i<players.length && players[i].id!=this.id; i++) {
+		for (var j=0; j<players.length && j!=i; j++) {
+			var distance = Math.sqrt(((players[i].x - players[j].x) * (players[i].x - players[j].x))+ ((players[i].y - players[j].y) * (players[i].y - players[j].y)));
 			if (players.length >= 2 && distance<40) {
-				c2c(players[i], players[i+1]);
+				c2c(players[i], players[j]);
+			}
 		}
 	}
+
 
 },30);
 
