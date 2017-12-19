@@ -97,7 +97,13 @@ setInterval(function() {
 		}));
 	}
 
-	for (var i=0; i<players.length-1; i+=2) {
+	for (var i=0; i<players.length-1; i) {
+				if (i==0) {
+			i+=2;
+    	}
+		else {
+			i++;
+    	}
 		var distance = Math.sqrt(((players[i].x - players[i+1].x) * (players[i].x - players[i+1].x))+ ((players[i].y - players[i+1].y) * (players[i].y - players[i+1].y)));
 			if (players.length >= 2 && distance<40) {
 				c2c(players[i], players[i+1]);
