@@ -28,10 +28,7 @@ wss.on('connection', function(ws) {
 	
 	ws.on('message', function(e) {
 		var message = JSON.parse(e);
-		// if (message.type == 'move') {
-		// 	players[message.info.id].moves = message.info.moves;
-		// 	updatedPlayers.push(message.info.id);
-		// }
+
 		if (message.type == 'playerUpdate') {
 			if (players[message.info.id]) {
 				players[message.info.id].moves = message.info.moves;
@@ -59,11 +56,8 @@ wss.on('connection', function(ws) {
 			for (var i=0; i<clients.length; i++) {
 				clients[i].send(JSON.stringify({
 					type: 'delPlayer',
-					id: message.id
-				}));
-				clients[i].send(JSON.stringify({
-					type: 'receiveId',
-					id: i
+					id: message.id,
+					newId: i
 				}));
 			}
 		}
