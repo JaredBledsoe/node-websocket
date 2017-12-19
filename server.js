@@ -96,6 +96,14 @@ setInterval(function() {
 			players: players
 		}));
 	}
+
+	for (var i=0; i<players.length-1; i+=2) {
+		var distance = Math.sqrt(((players[i].x - players[i+1].x) * (players[i].x - players[i+1].x))+ ((players[i].y - players[i+1].y) * (players[i].y - players[i+1].y)));
+			if (players.length >= 2 && distance<40) {
+				c2c(players[0], players[1]);
+		}
+	}
+
 },30);
 
 
@@ -128,24 +136,82 @@ Player.prototype.update = function() {
 
 	//Movement
 	if (this.moves[0]) {
-		this.velY -= 1;
+		this.velY -= .5;
 	}
 	else if (this.moves[2]) {
-		this.velY += 1;
+		this.velY += .5;
 	}
 	if (this.moves[1]) {
-		this.velX += 1;
+		this.velX += .5;
 	}
 	else if (this.moves[3]) {
-		this.velX -= 1;
+		this.velX -= .5;
 	}
 
 	//Collisions
-	if (this.x+20>400 || this.x-20<0) {
-		this.velX = -this.velX*1.1;
+	if (this.x-10>400 || this.x+10<0) {
+		// this.velX = -this.velX*1.1;
+		this.x = 200;
+		this.y = 200;
+		this.velX = 0;
+		this.velY = 0;
 	}
-	if (this.y+20>400 || this.y-20<0) {
-		this.velY = -this.velY*1.1;
+	if (this.y-10>400 || this.y+10<0) {
+		// this.velY = -this.velY*1.1;
+		this.x = 200;
+		this.y = 200;
+		this.velX = 0;
+		this.velY = 0;
 	}
 };
+
+
+
+
+
+
+//http://jsfiddle.net/inkfood/juzsR/
+function c2c(p1, p2) {
+	dx = p1.x-p2.x;
+    dy = p1.y-p2.y;
+    collisionision_angle = Math.atan2(dy, dx);
+    p1Mag = Math.sqrt(p1.velX*p1.velX+p1.velY*p1.velY);
+    p2Mag = Math.sqrt(p2.velX*p2.velX+p2.velY*p2.velY);
+    p1Dir = Math.atan2(p1.velY, p1.velX);
+    p2Dir = Math.atan2(p2.velY, p2.velX);
+    p1VelX = p1Mag*Math.cos(p1Dir-collisionision_angle);
+    p1VelY = p1Mag*Math.sin(p1Dir-collisionision_angle);
+    p2VelX = p2Mag*Math.cos(p2Dir-collisionision_angle);
+    p2VelY = p2Mag*Math.sin(p2Dir-collisionision_angle);
+    final_velX_1 = ((20-20)*p1VelX+(20+20)*p2VelX)/(20+20);
+    final_velX_2 = ((20+20)*p1VelX+(20-20)*p2VelX)/(20+20);
+    final_velY_1 = p1VelY;
+    final_velY_2 = p2VelY;
+    p1.velX = Math.cos(collisionision_angle)*final_velX_1+Math.cos(collisionision_angle+Math.PI/2)*final_velY_1;
+    p1.velY = Math.sin(collisionision_angle)*final_velX_1+Math.sin(collisionision_angle+Math.PI/2)*final_velY_1;
+    p2.velX = Math.cos(collisionision_angle)*final_velX_2+Math.cos(collisionision_angle+Math.PI/2)*final_velY_2;
+    p2.velY = Math.sin(collisionision_angle)*final_velX_2+Math.sin(collisionision_angle+Math.PI/2)*final_velY_2;
+    p1.x += p1.velX; 
+    p1.y += p1.velY; 
+    p2.x += p2.velX; 
+    p2.y += p2.velY; 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
