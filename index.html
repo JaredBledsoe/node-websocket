@@ -2,12 +2,25 @@
 <head>
 <style>
   canvas {
-    background-color: #f0f0f0;
     position: absolute;
-    left: 25%;
-    top: 25%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
     border-radius: 100%;
-    box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 60px 5px rgba(0,0,0,0.7);
+    background-image: url('escheresque.png');
+    background-repeat: repeat;
+  }
+  #background {
+    position: absolute;
+    width: 400;
+    height: 400;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 100%;
+    background-image: url(https://www.transparenttextures.com/patterns/escheresque.png);
+    background-repeat: repeat;
   }
   .died {
     animation-name: died;
@@ -28,16 +41,17 @@
 </style>
 </head>
 <body>
+  <div id="background"></div>
   <canvas></canvas>
   
   <script>
   var HOST = location.origin.replace(/^http/, 'ws');
 
   //Online
-  var ws = new WebSocket(HOST);
+  // var ws = new WebSocket(HOST);
 
   //Local
-  //var ws = new WebSocket('ws://localhost:3000');
+  var ws = new WebSocket('ws://localhost:3000');
 
   var canvas = document.getElementsByTagName('canvas')[0];
   canvas.width = 400;
@@ -46,6 +60,7 @@
   var id;
   var players = [];
   var keyStates = [];
+  // var oofs = new Audio("oof.mp3");
   
   window.onunload = function () {
    ws.send(JSON.stringify({
@@ -76,6 +91,8 @@
       }
     }
     else if (message.type == 'died') {
+      // oofs.currentTime = 0;
+      // oofs.play();
       document.getElementsByTagName('body')[0].classList.add('died');
       setTimeout(function() {
         document.getElementsByTagName('body')[0].classList.remove('died');
