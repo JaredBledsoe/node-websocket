@@ -195,10 +195,10 @@ function c2c(p1, p2) {
     p1VelY = p1Mag*Math.sin(p1Dir-collisionision_angle);
     p2VelX = p2Mag*Math.cos(p2Dir-collisionision_angle);
     p2VelY = p2Mag*Math.sin(p2Dir-collisionision_angle);
-    final_velX_1 = ((200-200)*p1VelX+(200+200)*p2VelX)/(200+200) * 2;
-    final_velX_2 = ((200+200)*p1VelX+(200-200)*p2VelX)/(200+200) * 2;
-    final_velY_1 = p1VelY * 2;
-    final_velY_2 = p2VelY * 2;
+    final_velX_1 = ((200-200)*p1VelX+(200+200)*p2VelX)/(200+200) * 1.2;
+    final_velX_2 = ((200+200)*p1VelX+(200-200)*p2VelX)/(200+200) * 1.2;
+    final_velY_1 = p1VelY * 1.2;
+    final_velY_2 = p2VelY * 1.2;
     p1.velX = Math.cos(collisionision_angle)*final_velX_1+Math.cos(collisionision_angle+Math.PI/2)*final_velY_1;
     p1.velY = Math.sin(collisionision_angle)*final_velX_1+Math.sin(collisionision_angle+Math.PI/2)*final_velY_1;
     p2.velX = Math.cos(collisionision_angle)*final_velX_2+Math.cos(collisionision_angle+Math.PI/2)*final_velY_2;
