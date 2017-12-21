@@ -152,28 +152,16 @@ Player.prototype.update = function() {
 	}
 
 	//Collisions
-	if (this.x-10>400 || this.x+10<0) {
+	if ((Math.sqrt(((this.x - 200) * (this.x - 200))+ ((this.y - 200) * (this.y - 200)))) > 200) {
 		// this.velX = -this.velX*1.1;
-		this.x = Math.random()*300+50;
-		this.y = Math.random()*300+50;
+		this.x = Math.random()*250+50;
+		this.y = Math.random()*250+50;
 		this.velX = 0;
 		this.velY = 0;
 		clients[this.id].send(JSON.stringify({
 			type: 'died',
 			info: this.id
 		}));
-	}
-	if (this.y-10>400 || this.y+10<0) {
-		// this.velY = -this.velY*1.1;
-		this.x = Math.random()*300+50;
-		this.y = Math.random()*300+50;
-		this.velX = 0;
-		this.velY = 0;
-		clients[this.id].send(JSON.stringify({
-			type: 'died',
-			info: this.id
-		}));
-
 	}
 };
 
