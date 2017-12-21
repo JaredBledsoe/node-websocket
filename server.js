@@ -129,6 +129,11 @@ function Player() {
 	this.moves = [false, false, false, false];
 	this.updated = false;
 	this.pong = true;
+	this.spawn = function() {
+		this.x = Math.random()*320+80;
+		this.y = Math.random()*320+80;
+
+	};
 };
 
 Player.prototype.update = function() {
@@ -153,9 +158,7 @@ Player.prototype.update = function() {
 
 	//Collisions
 	if ((Math.sqrt(((this.x - 200) * (this.x - 200))+ ((this.y - 200) * (this.y - 200)))) > 200) {
-		// this.velX = -this.velX*1.1;
-		this.x = Math.random()*250+50;
-		this.y = Math.random()*250+50;
+		this.spawn();
 		this.velX = 0;
 		this.velY = 0;
 		clients[this.id].send(JSON.stringify({
