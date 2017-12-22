@@ -2,24 +2,21 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
-
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
-
 const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
 const wss = new SocketServer({ server });
+var clients = [];
+var players = [];
+
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('close', () => console.log('Client disconnected'));
 });
 
-var clients = [];
-var players = [];
-var updatedPlayers = [];
 
 wss.on('connection', function(ws) {
 	clients.push(ws);
@@ -32,22 +29,8 @@ wss.on('connection', function(ws) {
 		if (message.type == 'playerUpdate') {
 			if (players[message.info.id]) {
 				players[message.info.id].moves = message.info.moves;
-				players[message.info.id].updated = true;
 			}
 		}
-// 		if (message.type == 'pong') {
-// 			players[message.id].pong = true;
-// 			if (message.id == players.length-1) {
-// 				console.log("Reached end of players " + message.id);
-// 				for (var i=0; i<players.length; i++) {
-// 					if (players[i].pong = false) {
-// 						clients[i].close();
-// 						clients.splice(i, 1);
-// 						players.splice(i, 1);
-// 					}
-// 				}
-// 			}
-// 		}
 		if (message.type == 'close') {
 			clients[message.id].close();
 			clients.splice(message.id, 1);
@@ -105,20 +88,8 @@ setInterval(function() {
 			}
 		}
 	}
-
-
 },30);
 
-
-//Check if clients are still there
-// setInterval(function() {
-// 	for (var i=0; i<players.length; i++) {
-// 		players[i].pong = false;
-// 		clients[i].send(JSON.stringify({
-// 			type: 'ping'
-// 		}));
-// 	}
-// },1000);
 
 function Player() {
 	this.x = 200;
@@ -127,12 +98,10 @@ function Player() {
 	this.velY = Math.random()*2;
 	this.id = clients.length-1;
 	this.moves = [false, false, false, false];
-	this.updated = false;
 	this.pong = true;
 	this.spawn = function() {
 		this.x = Math.random()*320+80;
 		this.y = Math.random()*320+80;
-
 	};
 };
 
@@ -169,10 +138,6 @@ Player.prototype.update = function() {
 };
 
 
-
-
-
-
 //http://jsfiddle.net/inkfood/juzsR/
 function c2c(p1, p2) {
 	dx = p1.x-p2.x;
@@ -198,7 +163,6 @@ function c2c(p1, p2) {
     p1.y += p1.velY; 
     p2.x += p2.velX; 
     p2.y += p2.velY; 
-
 }
 
 
