@@ -85,9 +85,7 @@
 
       for (var i=0; i<message.players.length; i++) {
         players[i].x = message.players[i].x;
-        players[i].velX = message.players[i].velX;
         players[i].y = message.players[i].y;
-        players[i].velY = message.players[i].velY;
       }
     }
     else if (message.type == 'died') {
@@ -98,19 +96,13 @@
         document.getElementsByTagName('body')[0].classList.remove('died');
       },500);
     }
-//     else if (message.type == 'ping') {
-//       ws.send(JSON.stringify({
-//           type: 'pong',
-//           id: id
-//       }));
-//     }
     else if (message.type == 'newPlayer') {
-      players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
+      players.push(new Player(message.info.x, message.info.y, message.info.id, message.info.moves));
       console.log(message);
     }
 
     else if (message.type == 'initPlayers') {
-      players.push(new Player(message.info.x, message.info.velX, message.info.y, message.info.velY, message.info.id, message.info.moves));
+      players.push(new Player(message.info.x, message.info.y, message.info.id, message.info.moves));
     }
     else if (message.type == 'receiveId') {
       id = message.id;
@@ -133,11 +125,9 @@
   }
 
 
-  function Player(x, velX, y, velY, id, moves) {
+  function Player(x, y, id, moves) {
     this.x = x;
-    this.velX = velX;
     this.y = y;
-    this.velY = velY;
     this.id = id;
     this.moves = moves;
     this.updated = false;
