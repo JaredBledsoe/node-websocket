@@ -126,7 +126,7 @@ Player.prototype.update = function() {
 	}
 
 	//Collisions
-	if ((Math.sqrt(((this.x - 200) * (this.x - 200))+ ((this.y - 200) * (this.y - 200)))) > 200) {
+	if ((Math.sqrt(((this.x - 300) * (this.x - 300))+ ((this.y - 300) * (this.y - 300)))) > 300) {
 		this.spawn();
 		this.velX = 0;
 		this.velY = 0;
